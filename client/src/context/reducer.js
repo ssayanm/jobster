@@ -42,14 +42,30 @@ const reducer = (state, action) => {
     }
 
     case SETUP_USER_BEGIN: {
-      return { ...state };
+      return { ...state, isLoading: true };
     }
 
     case SETUP_USER_SUCCESS: {
-      return { ...state };
+      return {
+        ...state,
+        user: action.payload.user,
+        token: action.payload.token,
+        userLocation: action.payload.location,
+        jobLocation: action.payload.location,
+        isLoading: false,
+        showAlert: true,
+        alertType: "success",
+        alertText: "User added successfully! redirecting...",
+      };
     }
     case SETUP_USER_ERROR: {
-      return { ...state };
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: "danger",
+        alertText: action.payload.msg,
+      };
     }
 
     case TOGGLE_SIDEBAR: {

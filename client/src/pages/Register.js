@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Logo, FormRow, Alert } from "../components";
 import styled from "styled-components";
 import { useAppContext } from "../context/appContext";
@@ -11,8 +12,10 @@ const initialState = {
 };
 
 const Register = () => {
-  const { isLoading, showAlert, displayAlert } = useAppContext();
+  const { isLoading, showAlert, displayAlert, setupUser, user } =
+    useAppContext();
   const [values, setValues] = useState(initialState);
+  const navigate = useNavigate();
 
   //global state and useNavigate
 
@@ -31,8 +34,22 @@ const Register = () => {
       displayAlert();
       return;
     }
+    const currentUser = { name, email, password };
+    if (isMember) {
+      console.log("memeber");
+    } else {
+      setupUser(currentUser);
+    }
     console.log(values);
   };
+
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+    }
+  }, [user, navigate]);
 
   return (
     <Wrapper className="full-page">
@@ -68,7 +85,7 @@ const Register = () => {
           handleChange={handleChange}
         />
 
-        <button type="submit" className="btn btn-block">
+        <button type="submit" className="btn btn-block" disabled={isLoading}>
           submit
         </button>
 
