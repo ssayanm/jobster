@@ -36,9 +36,17 @@ const Register = () => {
     }
     const currentUser = { name, email, password };
     if (isMember) {
-      console.log("memeber");
+      setupUser({
+        currentUser,
+        endpoint: "login",
+        alertText: "Login successfull! Redirecting...",
+      });
     } else {
-      setupUser(currentUser);
+      setupUser({
+        currentUser,
+        endpoint: "register",
+        alertText: "Registration successfull! Redirecting...",
+      });
     }
     console.log(values);
   };

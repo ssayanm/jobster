@@ -55,7 +55,7 @@ const reducer = (state, action) => {
         isLoading: false,
         showAlert: true,
         alertType: "success",
-        alertText: "User added successfully! redirecting...",
+        alertText: action.payload.alertText,
       };
     }
     case SETUP_USER_ERROR: {

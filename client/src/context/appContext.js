@@ -72,10 +72,13 @@ const AppProvider = ({ children }) => {
     localStorage.removeItem("location");
   };
 
-  const setupUser = async (currentUser) => {
+  const setupUser = async ({ currentUser, endpoint, alertText }) => {
     dispatch({ type: SETUP_USER_BEGIN });
     try {
-      const response = await axios.post("/api/v1/auth/register", currentUser);
+      const response = await axios.post(
+        `/api/v1/auth/${endpoint}`,
+        currentUser
+      );
       // console.log(response);
       const { user, location, token } = response.data;
       dispatch({
@@ -84,6 +87,7 @@ const AppProvider = ({ children }) => {
           user,
           token,
           location,
+          alertText,
         },
       });
       //loacl storage
