@@ -26,6 +26,7 @@ import {
   CLEAR_FILTERS,
   CHANGE_PAGE,
 } from "./actions";
+import { initialState } from "./appContext";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -69,10 +70,16 @@ const reducer = (state, action) => {
     }
 
     case TOGGLE_SIDEBAR: {
-      return { ...state };
+      return { ...state, showSidebar: !state.showSidebar };
     }
     case LOGOUT_USER: {
-      return { ...state };
+      return {
+        ...initialState,
+        user: null,
+        token: null,
+        userLocation: "",
+        jobLocation: "",
+      };
     }
 
     case UPDATE_USER_BEGIN: {

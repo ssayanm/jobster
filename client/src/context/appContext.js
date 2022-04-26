@@ -43,6 +43,7 @@ const initialState = {
   token: token,
   userLocation: userLocation || "",
   jobLocation: userLocation || "",
+  showSidebar: false,
 };
 const AppContext = React.createContext();
 
@@ -104,6 +105,15 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const toggleSidebar = () => {
+    dispatch({ type: TOGGLE_SIDEBAR });
+  };
+
+  const logoutUser = () => {
+    dispatch({ type: LOGOUT_USER });
+    removeUserFromLocalStorage();
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -111,6 +121,8 @@ const AppProvider = ({ children }) => {
         displayAlert,
         clearAlert,
         setupUser,
+        toggleSidebar,
+        logoutUser,
       }}
     >
       {children}
