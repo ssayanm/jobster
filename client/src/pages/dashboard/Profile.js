@@ -10,7 +10,54 @@ const Profile = () => {
   const [email, setEmail] = useState(user && user.email);
   const [lastName, setlastName] = useState(user && user.lastName);
   const [location, setLocation] = useState(user && user.location);
-  return <Wrapper>Profile</Wrapper>;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!name || !email || !lastName || !location) {
+      displayAlert();
+      return;
+    }
+    updateUser({ name, lastName, email, location });
+  };
+
+  return (
+    <Wrapper>
+      <form className="form" onSubmit={handleSubmit}>
+        <h3>profile</h3>
+        {showAlert && <Alert />}
+        <div className="form-center">
+          <FormRow
+            type="text"
+            name="name"
+            value={name}
+            handleChange={(e) => setName(e.target.value)}
+          />
+          <FormRow
+            type="text"
+            name="lastName"
+            labelText="last name"
+            value={lastName}
+            handleChange={(e) => setlastName(e.target.value)}
+          />
+          <FormRow
+            type="email"
+            name="email"
+            value={email}
+            handleChange={(e) => setEmail(e.target.value)}
+          />
+          <FormRow
+            type="text"
+            name="location"
+            value={location}
+            handleChange={(e) => setLocation(e.target.value)}
+          />
+          <button type="submit" className="btn btn-block" disabled={isLoading}>
+            {isLoading ? "Please Wait.." : "save changes"}
+          </button>
+        </div>
+      </form>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.section`
