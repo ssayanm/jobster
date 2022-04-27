@@ -1,4 +1,5 @@
 import React, { useReducer, useContext } from "react";
+
 import reducer from "./reducer";
 import axios from "axios";
 import {
@@ -42,8 +43,11 @@ const initialState = {
   user: user ? JSON.parse(user) : null,
   token: token,
   userLocation: userLocation || "",
-  jobLocation: userLocation || "",
   showSidebar: false,
+  isEditing: false,
+  editJobId: "",
+  position: "",
+  company: "",
 };
 
 const AppContext = React.createContext();
@@ -51,32 +55,31 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  //axios global setup
+  // axios
   const authFetch = axios.create({
     baseURL: "/api/v1",
   });
+  // request
 
-  //request
   authFetch.interceptors.request.use(
     (config) => {
-      config.headers.common["Authorization"] = `Bearer ${state.token}`;
+      // config.headers.common["Authorization"] = `Bearer ${state.token}`;
       return config;
     },
     (error) => {
       return Promise.reject(error);
     }
   );
+  // response
 
-  //response
   authFetch.interceptors.response.use(
-    (resposne) => {
-      return resposne;
+    (response) => {
+      return response;
     },
     (error) => {
       // console.log(error.response)
       if (error.response.status === 401) {
-        console.log("auth error");
-        // logoutUser();
+        logoutUser();
       }
       return Promise.reject(error);
     }
@@ -105,38 +108,28 @@ const AppProvider = ({ children }) => {
     localStorage.removeItem("location");
   };
 
-  const setupUser = async ({ currentUser, endpoint, alertText }) => {
+  const setupUser = async ({ currentUser, endPoint, alertText }) => {
     dispatch({ type: SETUP_USER_BEGIN });
     try {
-      const response = await axios.post(
-        `/api/v1/auth/${endpoint}`,
+      const { data } = await axios.post(
+        `/api/v1/auth/${endPoint}`,
         currentUser
       );
-      // console.log(response);
-      const { user, location, token } = response.data;
+
+      const { user, token, location } = data;
       dispatch({
         type: SETUP_USER_SUCCESS,
-        payload: {
-          user,
-          token,
-          location,
-          alertText,
-        },
+        payload: { user, token, location, alertText },
       });
-      //loacl storage
       addUserToLocalStorage({ user, token, location });
     } catch (error) {
-      console.log(error.response);
       dispatch({
         type: SETUP_USER_ERROR,
-        payload: {
-          msg: error.response.data.msg,
-        },
+        payload: { msg: error.response.data.msg },
       });
     }
     clearAlert();
   };
-
   const toggleSidebar = () => {
     dispatch({ type: TOGGLE_SIDEBAR });
   };
@@ -145,7 +138,6 @@ const AppProvider = ({ children }) => {
     dispatch({ type: LOGOUT_USER });
     removeUserFromLocalStorage();
   };
-
   const updateUser = async (currentUser) => {
     dispatch({ type: UPDATE_USER_BEGIN });
     try {
@@ -157,7 +149,6 @@ const AppProvider = ({ children }) => {
         type: UPDATE_USER_SUCCESS,
         payload: { user, location, token },
       });
-
       addUserToLocalStorage({ user, location, token });
     } catch (error) {
       if (error.response.status !== 401) {
@@ -170,23 +161,31 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const handleChange = ({ name, value }) => {
+    dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
+  };
+  const clearValues = () => {
+    dispatch({ type: CLEAR_VALUES });
+  };
+
   return (
     <AppContext.Provider
       value={{
         ...state,
         displayAlert,
-        clearAlert,
         setupUser,
         toggleSidebar,
         logoutUser,
         updateUser,
+        handleChange,
+        clearValues,
       }}
     >
       {children}
     </AppContext.Provider>
   );
 };
-// make sure use
+
 const useAppContext = () => {
   return useContext(AppContext);
 };

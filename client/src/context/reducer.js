@@ -89,7 +89,7 @@ const reducer = (state, action) => {
     case UPDATE_USER_SUCCESS: {
       return {
         ...state,
-        isLoading: false,
+        isLoading: true,
         token: action.payload.token,
         user: action.payload.user,
         userLocation: action.payload.location,
