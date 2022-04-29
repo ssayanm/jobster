@@ -6,10 +6,11 @@ import styled from "styled-components";
 const Profile = () => {
   const { user, showAlert, displayAlert, updateUser, isLoading } =
     useAppContext();
-  const [name, setName] = useState(user && user.name);
-  const [email, setEmail] = useState(user && user.email);
-  const [lastName, setlastName] = useState(user && user.lastName);
-  const [location, setLocation] = useState(user && user.location);
+
+  const [name, setName] = useState(user?.name);
+  const [email, setEmail] = useState(user?.email);
+  const [lastName, setLastName] = useState(user?.lastName);
+  const [location, setLocation] = useState(user?.location);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,7 +18,7 @@ const Profile = () => {
       displayAlert();
       return;
     }
-    updateUser({ name, lastName, email, location });
+    updateUser({ name, email, lastName, location });
   };
 
   return (
@@ -37,7 +38,7 @@ const Profile = () => {
             name="lastName"
             labelText="last name"
             value={lastName}
-            handleChange={(e) => setlastName(e.target.value)}
+            handleChange={(e) => setLastName(e.target.value)}
           />
           <FormRow
             type="email"

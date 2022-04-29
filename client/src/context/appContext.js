@@ -1,5 +1,4 @@
 import React, { useReducer, useContext } from "react";
-
 import reducer from "./reducer";
 import axios from "axios";
 import {
@@ -43,13 +42,9 @@ const initialState = {
   user: user ? JSON.parse(user) : null,
   token: token,
   userLocation: userLocation || "",
+  jobLocation: userLocation || "",
   showSidebar: false,
-  isEditing: false,
-  editJobId: "",
-  position: "",
-  company: "",
 };
-
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
@@ -59,11 +54,12 @@ const AppProvider = ({ children }) => {
   const authFetch = axios.create({
     baseURL: "/api/v1",
   });
+
   // request
 
   authFetch.interceptors.request.use(
     (config) => {
-      // config.headers.common["Authorization"] = `Bearer ${state.token}`;
+      config.headers.common["Authorization"] = `Bearer ${state.token}`;
       return config;
     },
     (error) => {
@@ -108,28 +104,38 @@ const AppProvider = ({ children }) => {
     localStorage.removeItem("location");
   };
 
-  const setupUser = async ({ currentUser, endPoint, alertText }) => {
+  const setupUser = async ({ currentUser, endpoint, alertText }) => {
     dispatch({ type: SETUP_USER_BEGIN });
     try {
-      const { data } = await axios.post(
-        `/api/v1/auth/${endPoint}`,
+      const response = await axios.post(
+        `/api/v1/auth/${endpoint}`,
         currentUser
       );
-
-      const { user, token, location } = data;
+      // console.log(response);
+      const { user, location, token } = response.data;
       dispatch({
         type: SETUP_USER_SUCCESS,
-        payload: { user, token, location, alertText },
+        payload: {
+          user,
+          token,
+          location,
+          alertText,
+        },
       });
+      //loacl storage
       addUserToLocalStorage({ user, token, location });
     } catch (error) {
+      // console.log(error.response);
       dispatch({
         type: SETUP_USER_ERROR,
-        payload: { msg: error.response.data.msg },
+        payload: {
+          msg: error.response.data.msg,
+        },
       });
     }
     clearAlert();
   };
+
   const toggleSidebar = () => {
     dispatch({ type: TOGGLE_SIDEBAR });
   };
@@ -138,6 +144,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: LOGOUT_USER });
     removeUserFromLocalStorage();
   };
+
   const updateUser = async (currentUser) => {
     dispatch({ type: UPDATE_USER_BEGIN });
     try {
@@ -161,31 +168,23 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
-  const handleChange = ({ name, value }) => {
-    dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
-  };
-  const clearValues = () => {
-    dispatch({ type: CLEAR_VALUES });
-  };
-
   return (
     <AppContext.Provider
       value={{
         ...state,
         displayAlert,
+        clearAlert,
         setupUser,
         toggleSidebar,
         logoutUser,
         updateUser,
-        handleChange,
-        clearValues,
       }}
     >
       {children}
     </AppContext.Provider>
   );
 };
-
+// make sure use
 const useAppContext = () => {
   return useContext(AppContext);
 };
