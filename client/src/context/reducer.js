@@ -126,14 +126,26 @@ const reducer = (state, action) => {
     }
 
     case CREATE_JOB_BEGIN: {
-      return { ...state };
+      return { ...state, isLoading: true };
     }
 
     case CREATE_JOB_SUCCESS: {
-      return { ...state };
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: "success",
+        alertText: "New Job Created",
+      };
     }
     case CREATE_JOB_ERROR: {
-      return { ...state };
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: "danger",
+        alertText: action.payload.msg,
+      };
     }
 
     case GET_JOBS_BEGIN: {
