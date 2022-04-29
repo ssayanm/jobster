@@ -110,10 +110,19 @@ const reducer = (state, action) => {
     }
 
     case HANDLE_CHANGE: {
-      return { ...state };
+      return { ...state, [action.payload.name]: action.payload.value };
     }
     case CLEAR_VALUES: {
-      return { ...state };
+      const initialState = {
+        isEditing: false,
+        editJobId: "",
+        position: "",
+        company: "",
+        jobLocation: state.userLocation,
+        jobType: "full-time",
+        status: "pending",
+      };
+      return { ...state, ...initialState };
     }
 
     case CREATE_JOB_BEGIN: {

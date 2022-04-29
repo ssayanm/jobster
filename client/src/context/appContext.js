@@ -42,8 +42,17 @@ const initialState = {
   user: user ? JSON.parse(user) : null,
   token: token,
   userLocation: userLocation || "",
-  jobLocation: userLocation || "",
   showSidebar: false,
+  jobLocation: userLocation || "",
+  isEditing: false,
+  editJobId: "",
+  position: "",
+  company: "",
+  // jobLocation
+  jobTypeOptions: ["full-time", "part-time", "remote", "intern"],
+  jobType: "full-time",
+  statusOptions: ["interview", "declined", "pending"],
+  status: "pending",
 };
 const AppContext = React.createContext();
 
@@ -168,6 +177,14 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const handleChange = ({ name, value }) => {
+    dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
+  };
+
+  const clearValues = () => {
+    dispatch({ type: CLEAR_VALUES });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -178,6 +195,8 @@ const AppProvider = ({ children }) => {
         toggleSidebar,
         logoutUser,
         updateUser,
+        handleChange,
+        clearValues,
       }}
     >
       {children}

@@ -1,6 +1,99 @@
+import { useState } from "react";
+import { FormRow, Alert, FormRowSelect } from "../../components";
+import { useAppContext } from "../../context/appContext";
 import styled from "styled-components";
+
 const AddJob = () => {
-  return <div>AddJob page</div>;
+  const {
+    showAlert,
+    displayAlert,
+    company,
+    position,
+    jobLocation,
+    jobType,
+    jobTypeOptions,
+    status,
+    statusOptions,
+    isEditing,
+    handleChange,
+    clearValues,
+  } = useAppContext();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!company || !position || !jobLocation) {
+      displayAlert();
+      return;
+    }
+    console.log("create job");
+  };
+
+  const handleJobInput = (e) => {
+    handleChange({ name: e.target.name, value: e.target.value });
+  };
+  return (
+    <Wrapper>
+      <form className="form" onSubmit={handleSubmit}>
+        <h3>{isEditing ? "edit job" : "Add Job"}</h3>
+        {showAlert && <Alert />}
+        <div className="form-center">
+          <FormRow
+            type="text"
+            name="company"
+            value={company}
+            handleChange={handleJobInput}
+          />
+
+          <FormRow
+            type="text"
+            name="position"
+            value={position}
+            handleChange={handleJobInput}
+          />
+          <FormRow
+            type="text"
+            name="job location"
+            value={jobLocation}
+            handleChange={handleJobInput}
+          />
+          <FormRowSelect
+            labelText="job type"
+            name="jobType"
+            value={jobType}
+            list={jobTypeOptions}
+            handleChange={handleJobInput}
+          />
+          <FormRowSelect
+            labelText="job status"
+            name="status"
+            value={status}
+            list={statusOptions}
+            handleChange={handleJobInput}
+          />
+
+          <div className="btn-container">
+            <button
+              type="submit"
+              className="btn btn-block submit-btn"
+              onClick={handleSubmit}
+            >
+              submit
+            </button>
+            <button
+              type="submit"
+              className="btn btn-block clear-btn"
+              onClick={(e) => {
+                e.preventDefault();
+                clearValues();
+              }}
+            >
+              clear
+            </button>
+          </div>
+        </div>
+      </form>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.section`
