@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FormRow, Alert, FormRowSelect } from "../../components";
 import { useAppContext } from "../../context/appContext";
 import styled from "styled-components";
@@ -19,6 +18,7 @@ const AddJob = () => {
     handleChange,
     clearValues,
     createJob,
+    editJob,
   } = useAppContext();
 
   const handleSubmit = (e) => {
@@ -28,6 +28,7 @@ const AddJob = () => {
       return;
     }
     if (isEditing) {
+      editJob();
       return;
     }
     createJob();

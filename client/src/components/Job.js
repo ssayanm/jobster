@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import moment from "moment";
-import { FaLocationArrow, FaBriefCase, FaCalenderAlt } from "react-icons/fa";
+import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../context/appContext";
 import JobInfo from "./JobInfo";
@@ -29,6 +29,12 @@ const Job = ({
         </div>
       </header>
       <div className="content">
+        <div className="content-center">
+          <JobInfo icon={<FaLocationArrow />} text={jobLocation} />
+          <JobInfo icon={<FaCalendarAlt />} text={date} />
+          <JobInfo icon={<FaBriefcase />} text={jobType} />
+          <div className={`status ${status}`}>{status}</div>
+        </div>
         <footer>
           <div className="actions">
             <Link
