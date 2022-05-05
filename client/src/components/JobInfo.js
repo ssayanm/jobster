@@ -1,12 +1,7 @@
 import styled from "styled-components";
 
-const JobInfo = ({ icon, text }) => {
-  return (
-    <Wrapper>
-      <span className="icon">{icon}</span>
-      <span className="text">{text}</span>
-    </Wrapper>
-  );
+const JobInfo = () => {
+  return <div>Job Info</div>;
 };
 
 const Wrapper = styled.div`

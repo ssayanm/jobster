@@ -1,4 +1,3 @@
-import { status } from "express/lib/response";
 import {
   DISPLAY_ALERT,
   CLEAR_ALERT,
@@ -163,18 +162,7 @@ const reducer = (state, action) => {
     }
 
     case SET_EDIT_JOB: {
-      const job = state.jobs.find((job) => job._id === action.payload.id);
-      const { _id, position, company, jobLocation, jobType, status } = job;
-      return {
-        ...state,
-        isEditing: true,
-        editJobId: _id,
-        position,
-        company,
-        jobLocation,
-        jobType,
-        status,
-      };
+      return { ...state };
     }
 
     case DELETE_JOB_BEGIN: {
