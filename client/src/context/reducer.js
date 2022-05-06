@@ -177,17 +177,29 @@ const reducer = (state, action) => {
     }
 
     case DELETE_JOB_BEGIN: {
-      return { ...state };
+      return { ...state, isLoading: true };
     }
     case EDIT_JOB_BEGIN: {
-      return { ...state };
+      return { ...state, isLoading: true };
     }
     case EDIT_JOB_SUCCESS: {
-      return { ...state };
+      return {
+        ...state,
+        isLoading: true,
+        showAlert: true,
+        alertType: "success",
+        alertText: "Job Updated!",
+      };
     }
 
     case EDIT_JOB_ERROR: {
-      return { ...state };
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: "danger",
+        alertText: action.payload.msg,
+      };
     }
     case SHOW_STATS_BEGIN: {
       return { ...state };

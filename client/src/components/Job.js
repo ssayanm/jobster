@@ -54,8 +54,6 @@ const Job = ({
           </div>
         </footer>
       </div>
-
-      <h5>{date}</h5>
     </Wrapper>
   );
 };
