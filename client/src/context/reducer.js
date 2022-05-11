@@ -202,11 +202,16 @@ const reducer = (state, action) => {
       };
     }
     case SHOW_STATS_BEGIN: {
-      return { ...state };
+      return { ...state, isLoading: true, showAlert: false };
     }
 
     case SHOW_STATS_SUCCESS: {
-      return { ...state };
+      return {
+        ...state,
+        isLoading: false,
+        stats: action.payload.stats,
+        monthlyApplications: action.payload.monthlyApplications,
+      };
     }
 
     case CLEAR_FILTERS: {

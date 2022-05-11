@@ -5,8 +5,11 @@ import Alert from "./Alert";
 import Navbar from "./Navbar";
 import BigSidebar from "./BigSidebar";
 import SmallSidebar from "./SmallSidebar";
-import SearchContainer from "../components/SearchContainer";
-import JobsContainer from "../components/JobsContainer";
+import SearchContainer from "./SearchContainer";
+import JobsContainer from "./JobsContainer";
+import ChartsContainer from "./ChartsContainer";
+import StatsContainer from "./StatsContainer";
+import Loading from "./Loading";
 
 export {
   Logo,
@@ -18,4 +21,7 @@ export {
   FormRowSelect,
   SearchContainer,
   JobsContainer,
+  ChartsContainer,
+  StatsContainer,
+  Loading,
 };

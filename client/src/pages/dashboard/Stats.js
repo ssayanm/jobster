@@ -1,6 +1,25 @@
+import { useEffect } from "react";
 import styled from "styled-components";
+import { ChartsContainer, StatsContainer, Loading } from "../../components";
+
+import { useAppContext } from "../../context/appContext";
+
 const Stats = () => {
-  return <div>Stats</div>;
+  const { showStats, isLoading, monthlyApplications } = useAppContext();
+
+  useEffect(() => {
+    showStats();
+  }, []);
+
+  if (isLoading) {
+    return <Loading center />;
+  }
+  return (
+    <div>
+      <StatsContainer />
+      {monthlyApplications.lenght > 0 && <ChartsContainer />}
+    </div>
+  );
 };
 const Wrapper = styled.section`
   border-radius: var(--borderRadius);
