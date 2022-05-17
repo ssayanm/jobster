@@ -44,11 +44,11 @@ const getAllJobs = async (req, res) => {
   };
 
   //stuff based on conditions
-  if (status !== "all") {
+  if (status && status !== "all") {
     queryObject.status = status;
   }
 
-  if (jobType !== "all") {
+  if (jobType && jobType !== "all") {
     queryObject.jobType = jobType;
   }
 

@@ -5,11 +5,21 @@ import Loading from "./Loading";
 import Job from "./Job";
 
 const JobsContainer = () => {
-  const { getJobs, jobs, page, totalJobs, isLoading } = useAppContext();
+  const {
+    getJobs,
+    jobs,
+    page,
+    totalJobs,
+    isLoading,
+    search,
+    searchStatus,
+    searchType,
+    sort,
+  } = useAppContext();
   useEffect(() => {
     getJobs();
     // eslint-disable-next-line
-  }, [page]);
+  }, [page, search, searchStatus, searchType, sort]);
 
   if (isLoading) {
     return <Loading center />;

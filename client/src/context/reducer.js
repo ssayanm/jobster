@@ -215,7 +215,13 @@ const reducer = (state, action) => {
     }
 
     case CLEAR_FILTERS: {
-      return { ...state };
+      return {
+        ...state,
+        search: "",
+        searchStatus: "",
+        searchType: "",
+        sort: "latest",
+      };
     }
     case CHANGE_PAGE: {
       return { ...state };
