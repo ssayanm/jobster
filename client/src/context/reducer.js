@@ -110,7 +110,7 @@ const reducer = (state, action) => {
     }
 
     case HANDLE_CHANGE: {
-      return { ...state, [action.payload.name]: action.payload.value };
+      return { ...state, page: 1, [action.payload.name]: action.payload.value };
     }
     case CLEAR_VALUES: {
       const initialState = {
@@ -224,7 +224,7 @@ const reducer = (state, action) => {
       };
     }
     case CHANGE_PAGE: {
-      return { ...state };
+      return { ...state, page: action.payload.page };
     }
     default:
       throw new Error(`No Matching "${action.type}" - action type`);

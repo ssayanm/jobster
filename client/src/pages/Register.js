@@ -48,7 +48,7 @@ const Register = () => {
         alertText: "Registration successfull! Redirecting...",
       });
     }
-    console.log(values);
+    // console.log(values);
   };
 
   useEffect(() => {
