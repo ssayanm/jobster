@@ -6,6 +6,7 @@ import { useAppContext } from "../context/appContext";
 
 const initialState = {
   name: "",
+  lastName: "",
   email: "",
   password: "",
   isMember: true,
@@ -29,12 +30,12 @@ const Register = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const { name, email, password, isMember } = values;
+    const { name, lastName, email, password, isMember } = values;
     if (!email || !password || (!isMember && !name)) {
       displayAlert();
       return;
     }
-    const currentUser = { name, email, password };
+    const currentUser = { name, lastName, email, password };
     if (isMember) {
       setupUser({
         currentUser,
@@ -69,12 +70,20 @@ const Register = () => {
 
         {/* name input */}
         {!values.isMember && (
-          <FormRow
-            type="text"
-            name="name"
-            value={values.name}
-            handleChange={handleChange}
-          />
+          <>
+            <FormRow
+              type="text"
+              name="name"
+              value={values.name}
+              handleChange={handleChange}
+            />
+            <FormRow
+              type="text"
+              name="lastName"
+              value={values.lastName}
+              handleChange={handleChange}
+            />
+          </>
         )}
 
         {/* email input */}

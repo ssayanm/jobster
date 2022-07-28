@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     maxlength: 20,
     trim: true,
-    default: "lastName",
+    // default: "lastName",
   },
   location: {
     type: String,
