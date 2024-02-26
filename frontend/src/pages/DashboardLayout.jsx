@@ -3,9 +3,8 @@ import styled from "styled-components";
 import SmallSidebar from "../components/SmallSidebar";
 import BigSidebar from "../components/BigSidebar";
 import Navbar from "../components/Navbar";
-import { createContext, useContext, useState } from "react";
-
-const DashboardContext = createContext();
+import { useState } from "react";
+import DashboardContext from "../DashboardContext"; // Adjust the path based on your project structure
 
 export default function DashboardLayout() {
   const [showSidebar, setShowSidebar] = useState("false");
@@ -38,8 +37,6 @@ export default function DashboardLayout() {
     </DashboardContext.Provider>
   );
 }
-
-export const useDashboardContext = () => useContext(DashboardContext);
 
 const Wrapper = styled.section`
   .dashboard {
