@@ -5,22 +5,40 @@ import BigSidebar from "../components/BigSidebar";
 import Navbar from "../components/Navbar";
 import { useState } from "react";
 import DashboardContext from "../DashboardContext"; // Adjust the path based on your project structure
+import propTypes from "prop-types";
+import checkDefaultTheme from "../checkDefaultTheme";
 
 export default function DashboardLayout() {
   const [showSidebar, setShowSidebar] = useState("false");
-  const [isDarkTheme, setIsDarkTheme] = useState("false");
+  const [isDarkTheme, setIsDarkTheme] = useState(checkDefaultTheme());
 
   const toggleDarkTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
+    const newDarkTheme = !isDarkTheme;
+    setIsDarkTheme(newDarkTheme);
+    document.body.classList.toggle("dark-theme", newDarkTheme);
+    localStorage.setItem("darkTheme", newDarkTheme);
   };
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
 
+  const logoutUser = () => {
+    console.log("log out user");
+  };
+
+  const user = { name: "sayan" };
+
   return (
     <DashboardContext.Provider
-      value={{ toggleDarkTheme, toggleSidebar, showSidebar, isDarkTheme }}
+      value={{
+        toggleDarkTheme,
+        toggleSidebar,
+        showSidebar,
+        isDarkTheme,
+        user,
+        logoutUser,
+      }}
     >
       <Wrapper>
         <main className="dashboard">
@@ -57,3 +75,7 @@ const Wrapper = styled.section`
     }
   }
 `;
+
+DashboardLayout.propTypes = {
+  isDarkThemeEnabled: propTypes.any,
+};

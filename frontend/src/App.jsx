@@ -13,6 +13,9 @@ import {
   Admin,
   Stats,
 } from "./pages";
+import checkDefaultTheme from "./checkDefaultTheme";
+
+checkDefaultTheme();
 
 const router = createBrowserRouter([
   {
