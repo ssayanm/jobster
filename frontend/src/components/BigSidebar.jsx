@@ -1,7 +1,27 @@
 import styled from "styled-components";
+import NavLinks from "./NavLinks";
+import { useDashboardContext } from "../DashboardContext";
+import Logo from "./Logo";
 
 export default function BigSidebar() {
-  return <Wrapper>BigSidebar</Wrapper>;
+  const { showSidebar } = useDashboardContext();
+  return (
+    <Wrapper>
+      <div
+        className={
+          showSidebar ? "sidebar-container " : "sidebar-container show-sidebar"
+        }
+      >
+        <div className="content">
+          <header>
+            <Logo />
+          </header>
+
+          <NavLinks isBigSidebar />
+        </div>
+      </div>
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.aside`
