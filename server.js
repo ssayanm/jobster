@@ -19,6 +19,10 @@ if (process.env.NODE_ENV === "development") {
 
 app.use("/api/v1/jobs", jobRouter);
 
+// app.use("/", (req, res) => {
+//   res.status(200).json({ msg: "Hello.. dont worry I am runing" });
+// });
+
 app.use("*", (req, res) => {
   res.status(404).json({ msg: "not found" });
 });

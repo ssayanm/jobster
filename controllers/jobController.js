@@ -9,7 +9,8 @@ export const createJob = async (req, res) => {
   // const { company, position } = req.body;
   const job = await Job.create(req.body);
 
-  res.status(201).json({ job });
+  // res.status(201).json({ job });
+  res.status(StatusCodes.OK).json({ jobs });
 };
 
 export const getJob = async (req, res) => {
