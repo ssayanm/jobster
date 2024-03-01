@@ -6,6 +6,8 @@ import mongoose from "mongoose";
 
 // Routes
 import jobRouter from "./routes/jobRouter.js";
+// Middleware
+import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
 
 const app = express();
 
@@ -27,10 +29,7 @@ app.use("*", (req, res) => {
   res.status(404).json({ msg: "not found" });
 });
 
-app.use((err, req, res, next) => {
-  console.log(err);
-  res.status(500).json({ msg: "something went wrong" });
-});
+app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 5100;
 
