@@ -3,6 +3,7 @@ import { BadRequestError } from "../errors/customErrors.js";
 import { JOB_STATUS, JOB_TYPE } from "../utils/constants.js";
 import mongoose from "mongoose";
 import Job from "../models/JobModel.js";
+import User from "../models/JobModel.js";
 
 const withValidationErrors = (validateValues) => {
   return [
@@ -41,7 +42,7 @@ export const validateIdParam = withValidationErrors([
   }),
 ]);
 
-export const validateRegsiterInput = withValidationErrors([
+export const validateRegisterInput = withValidationErrors([
   body("name").notEmpty().withMessage("name is required"),
   body("email")
     .notEmpty()
@@ -49,7 +50,7 @@ export const validateRegsiterInput = withValidationErrors([
     .isEmail()
     .withMessage("Oops! invalid email format")
     .custom(async (email) => {
-      const user = await UserActivation.findOne({ email });
+      const user = await User.findOne({ email });
       if (user) {
         throw new BadRequestError("User email already exists");
       }
@@ -59,6 +60,6 @@ export const validateRegsiterInput = withValidationErrors([
     .withMessage("password is required")
     .isLength({ min: 8 })
     .withMessage("password length must be atleast 8 characters long"),
+  body("lastName").notEmpty().withMessage("last name is required"),
   body("location").notEmpty().withMessage("location is required"),
-  body("lastname").notEmpty().withMessage("last name is required"),
 ]);
