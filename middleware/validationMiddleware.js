@@ -40,3 +40,25 @@ export const validateIdParam = withValidationErrors([
     if (!job) throw new NotFoundError(`no job with id : ${value}`);
   }),
 ]);
+
+export const validateRegsiterInput = withValidationErrors([
+  body("name").notEmpty().withMessage("name is required"),
+  body("email")
+    .notEmpty()
+    .withMessage("email is required")
+    .isEmail()
+    .withMessage("Oops! invalid email format")
+    .custom(async (email) => {
+      const user = await UserActivation.findOne({ email });
+      if (user) {
+        throw new BadRequestError("User email already exists");
+      }
+    }),
+  body("password")
+    .notEmpty()
+    .withMessage("password is required")
+    .isLength({ min: 8 })
+    .withMessage("password length must be atleast 8 characters long"),
+  body("location").notEmpty().withMessage("location is required"),
+  body("lastname").notEmpty().withMessage("last name is required"),
+]);
