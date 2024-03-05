@@ -26,5 +26,4 @@ export const login = async (req, res) => {
   if (!isPasswordCorrect) throw new UnauthenticatedError("wrong password");
 
   res.send("login route");
-  //   res.status(StatusCodes.CREATED).json({ user });
 };
