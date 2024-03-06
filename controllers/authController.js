@@ -3,6 +3,8 @@ import User from "../models/UserModel.js";
 import { hashPassword, comparePassword } from "../utils/passwordUtils.js";
 import { UnauthenticatedError } from "../errors/customErrors.js";
 
+import { createJWT } from "../utils/tokenUtils.js";
+
 export const register = async (req, res) => {
   const isFirstAccount = (await User.countDocuments()) === 0;
 
@@ -16,14 +18,14 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
-  if (!user) throw new UnauthenticatedError("invalid login email");
 
-  const isPasswordCorrect = await comparePassword(
-    req.body.password,
-    user.password
-  );
+  const token = createJWT({ userId: user._id, role: user.role });
+  console.log(token);
 
-  if (!isPasswordCorrect) throw new UnauthenticatedError("wrong password");
+  const isValidUser =
+    user && (await comparePassword(req.body.password, user.password));
+
+  if (!isValidUser) throw new UnauthenticatedError("invalid login credentials");
 
   res.send("login route");
 };
