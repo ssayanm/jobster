@@ -3,6 +3,7 @@ import "express-async-errors";
 import morgan from "morgan";
 import * as dotenv from "dotenv";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 
 // Routes
 import jobRouter from "./routes/jobRouter.js";
@@ -16,6 +17,7 @@ const app = express();
 
 dotenv.config();
 
+app.use(cookieParser());
 app.use(express.json());
 
 if (process.env.NODE_ENV === "development") {
