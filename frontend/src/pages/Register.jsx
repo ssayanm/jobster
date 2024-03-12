@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../components/Logo";
 import FormRow from "../components/FormRow";
@@ -6,7 +6,7 @@ import FormRow from "../components/FormRow";
 export default function Register() {
   return (
     <Wrapper>
-      <form className="form">
+      <Form method="post" className="form">
         <Logo />
         <h4>Register</h4>
         <FormRow
@@ -15,7 +15,7 @@ export default function Register() {
           defaultValue="Sayan"
           labelText="First Name"
         />
-        <FormRow type="text" name="lastname" labelText="Last Name" />
+        <FormRow type="text" name="lastName" labelText="Last Name" />
         <FormRow type="text" name="location" labelText="Location" />
         <FormRow type="email" name="email" labelText="Email" />
         <FormRow type="password" name="password" labelText="Password" />
@@ -28,7 +28,7 @@ export default function Register() {
             Login
           </Link>
         </p>
-      </form>
+      </Form>
     </Wrapper>
   );
 }

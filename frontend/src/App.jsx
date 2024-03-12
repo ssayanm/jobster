@@ -14,6 +14,7 @@ import {
   Stats,
 } from "./pages";
 import checkDefaultTheme from "./checkDefaultTheme";
+import { registerAction } from "../action/registerAction";
 
 checkDefaultTheme();
 
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+        action: registerAction,
       },
       {
         path: "login",
