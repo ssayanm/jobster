@@ -14,7 +14,7 @@ import {
   Stats,
 } from "./pages";
 import checkDefaultTheme from "./checkDefaultTheme";
-import { registerAction } from "../action/registerAction";
+import { registerAction } from "./action/registerAction";
 
 checkDefaultTheme();
 
