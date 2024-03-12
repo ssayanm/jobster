@@ -1,9 +1,12 @@
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useNavigation } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../components/Logo";
 import FormRow from "../components/FormRow";
 
 export default function Register() {
+  const navigation = useNavigation();
+  console.log(navigation);
+  const isSubmitting = navigation.state === "submitting";
   return (
     <Wrapper>
       <Form method="post" className="form">
@@ -19,8 +22,8 @@ export default function Register() {
         <FormRow type="text" name="location" labelText="Location" />
         <FormRow type="email" name="email" labelText="Email" />
         <FormRow type="password" name="password" labelText="Password" />
-        <button type="submit" className="btn btn-block">
-          Register
+        <button type="submit" className="btn btn-block" disabled={isSubmitting}>
+          {isSubmitting ? "submitting" : "submit"}
         </button>
         <p>
           Already a member?
