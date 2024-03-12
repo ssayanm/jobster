@@ -15,6 +15,7 @@ import {
 } from "./pages";
 import checkDefaultTheme from "./checkDefaultTheme";
 import { registerAction } from "./action/registerAction";
+import { loginAction } from "./action/loginAction";
 
 checkDefaultTheme();
 
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+        action: loginAction,
       },
       {
         path: "dashboard",
