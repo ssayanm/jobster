@@ -5,8 +5,8 @@ import FormRow from "../components/FormRow";
 
 export default function Register() {
   const navigation = useNavigation();
-  console.log(navigation);
   const isSubmitting = navigation.state === "submitting";
+
   return (
     <Wrapper>
       <Form method="post" className="form">

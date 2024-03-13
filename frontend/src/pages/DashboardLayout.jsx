@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, redirect, useLoaderData, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import SmallSidebar from "../components/SmallSidebar";
 import BigSidebar from "../components/BigSidebar";
@@ -6,9 +6,15 @@ import Navbar from "../components/Navbar";
 import { useState } from "react";
 import DashboardContext from "../DashboardContext"; // Adjust the path based on your project structure
 import propTypes from "prop-types";
-import checkDefaultTheme from "../checkDefaultTheme";
+import checkDefaultTheme from "../utils/checkDefaultTheme";
+import { toast } from "react-toastify";
+import customFetch from "../utils/customFetch";
+import { loader } from "../utils/loader";
 
 export default function DashboardLayout() {
+  const navigate = useNavigate();
+  const user = useLoaderData(loader);
+  console.log(user.user.name);
   const [showSidebar, setShowSidebar] = useState("false");
   const [isDarkTheme, setIsDarkTheme] = useState(checkDefaultTheme());
 
@@ -23,11 +29,11 @@ export default function DashboardLayout() {
     setShowSidebar(!showSidebar);
   };
 
-  const logoutUser = () => {
-    console.log("log out user");
+  const logoutUser = async () => {
+    navigate("/");
+    await customFetch.get("/auth/logout");
+    toast.success("Logging out...");
   };
-
-  const user = { name: "sayan" };
 
   return (
     <DashboardContext.Provider

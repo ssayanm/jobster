@@ -13,9 +13,10 @@ import {
   Admin,
   Stats,
 } from "./pages";
-import checkDefaultTheme from "./checkDefaultTheme";
+import checkDefaultTheme from "./utils/checkDefaultTheme";
 import { registerAction } from "./action/registerAction";
 import { loginAction } from "./action/loginAction";
+import { loader } from "./utils/loader";
 
 checkDefaultTheme();
 
@@ -42,6 +43,7 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <DashboardLayout />,
+        loader: loader,
         children: [
           {
             index: true,

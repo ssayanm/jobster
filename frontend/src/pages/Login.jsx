@@ -5,8 +5,8 @@ import { Form, Link, useNavigation } from "react-router-dom";
 
 export default function Login() {
   const navigation = useNavigation();
-  console.log(navigation);
   const isSubmitting = navigation.state === "submitting";
+
   return (
     <Wrapper>
       <Form className="form" method="post">
