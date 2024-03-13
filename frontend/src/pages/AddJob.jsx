@@ -2,6 +2,7 @@ import { Form, useNavigation, useOutletContext } from "react-router-dom";
 import FormRow from "../components/FormRow";
 import styled from "styled-components";
 import { JOB_STATUS, JOB_TYPE } from "../utils/constants";
+import FormRowSelect from "../components/FormRowSelect";
 
 export default function AddJob() {
   const { user } = useOutletContext();
@@ -23,44 +24,19 @@ export default function AddJob() {
           defaultValue={user.location}
         />
 
-        <div className="form-row">
-          <label htmlFor="jobStatus" className="form-label">
-            job type
-          </label>
-          <select
-            name="jobStatus"
-            id="jobStatus"
-            className="form-select"
-            // defaultValue={JOB_TYPE.PART_TIME}
-          >
-            {Object.values(JOB_TYPE).map((item) => {
-              return (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-        <div className="form-row">
-          <label htmlFor="jobStatus" className="form-label">
-            job status
-          </label>
-          <select
-            name="jobStatus"
-            id="jobStatus"
-            className="form-select"
-            defaultValue={JOB_STATUS.pending}
-          >
-            {Object.values(JOB_STATUS).map((item) => {
-              return (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              );
-            })}
-          </select>
-        </div>
+        <FormRowSelect
+          labelText="job type"
+          name="jobType"
+          defaultValue={JOB_TYPE.FULL_TIME}
+          list={Object.values(JOB_TYPE)}
+        />
+
+        <FormRowSelect
+          labelText="job status"
+          name="jobStatus"
+          defaultValue={JOB_STATUS.PENDING}
+          list={Object.values(JOB_STATUS)}
+        />
 
         <button
           type="submit"
