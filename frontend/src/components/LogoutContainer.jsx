@@ -1,6 +1,6 @@
 import { FaCaretDown, FaUserCircle } from "react-icons/fa";
 import styled from "styled-components";
-import { useDashboardContext } from "../DashboardContext";
+import { useDashboardContext } from "../context/DashboardContext";
 import { useState } from "react";
 
 export default function LogoutContainer() {

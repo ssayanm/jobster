@@ -4,7 +4,7 @@ import SmallSidebar from "../components/SmallSidebar";
 import BigSidebar from "../components/BigSidebar";
 import Navbar from "../components/Navbar";
 import { useState } from "react";
-import DashboardContext from "../DashboardContext"; // Adjust the path based on your project structure
+import DashboardContext from "../context/DashboardContext";
 import propTypes from "prop-types";
 import { toast } from "react-toastify";
 import customFetch from "../utils/customFetch";

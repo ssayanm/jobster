@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useDashboardContext } from "../DashboardContext";
+import { useDashboardContext } from "../context/DashboardContext";
 import { FaTimes } from "react-icons/fa";
 import Logo from "./Logo";
 import NavLinks from "./NavLinks";

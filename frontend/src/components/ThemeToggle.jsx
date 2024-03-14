@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useDashboardContext } from "../DashboardContext";
+import { useDashboardContext } from "../context/DashboardContext";
 
 import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
 

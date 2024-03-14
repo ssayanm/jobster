@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import NavLinks from "./NavLinks";
-import { useDashboardContext } from "../DashboardContext";
+import { useDashboardContext } from "../context/DashboardContext";
 import Logo from "./Logo";
 
 export default function BigSidebar() {

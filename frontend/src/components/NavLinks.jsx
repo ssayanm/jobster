@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import links from "../utils/links";
-import { useDashboardContext } from "../DashboardContext";
+import { useDashboardContext } from "../context/DashboardContext";
 import propTypes from "prop-types";
 
 export default function NavLinks({ isBigSidebar }) {

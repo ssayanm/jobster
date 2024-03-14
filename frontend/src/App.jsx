@@ -44,13 +44,12 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <DashboardLayout />,
-
+        loader: userLoader,
         children: [
           {
             index: true,
             element: <AddJob />,
             action: jobAction,
-            loader: jobLoader,
           },
           {
             path: "stats",
@@ -72,7 +71,6 @@ const router = createBrowserRouter([
             element: <Admin />,
           },
         ],
-        loader: userLoader,
       },
     ],
   },
