@@ -16,7 +16,8 @@ import {
 import checkDefaultTheme from "./utils/checkDefaultTheme";
 import { registerAction } from "./action/registerAction";
 import { loginAction } from "./action/loginAction";
-import { loader } from "./utils/loader";
+import { userLoader, jobLoader } from "./utils/loader";
+import { jobAction } from "./action/jobAction";
 
 checkDefaultTheme();
 
@@ -43,11 +44,13 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <DashboardLayout />,
-        loader: loader,
+        loader: userLoader,
+
         children: [
           {
             index: true,
             element: <AddJob />,
+            action: jobAction,
           },
           {
             path: "stats",
@@ -56,6 +59,7 @@ const router = createBrowserRouter([
           {
             path: "all-jobs",
             element: <AllJobs />,
+            loader: jobLoader,
           },
 
           {

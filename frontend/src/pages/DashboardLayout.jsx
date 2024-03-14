@@ -9,11 +9,11 @@ import propTypes from "prop-types";
 import { toast } from "react-toastify";
 import customFetch from "../utils/customFetch";
 import checkDefaultTheme from "../utils/checkDefaultTheme";
-import { loader } from "../utils/loader";
+import { jobLoader, userLoader } from "../utils/loader";
 
 export default function DashboardLayout() {
   const navigate = useNavigate();
-  const { user } = useLoaderData(loader);
+  const { user } = useLoaderData(userLoader);
 
   const [showSidebar, setShowSidebar] = useState("false");
   const [isDarkTheme, setIsDarkTheme] = useState(checkDefaultTheme());
