@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { jobLoader } from "../utils/loader";
 import { useLoaderData } from "react-router-dom";
 
-export default function AllJobs() {
-  const { data } = useLoaderData(jobLoader);
+const AllJobs = () => {
+  const data = useLoaderData();
 
   const { jobs } = data;
   console.log(jobs);
@@ -13,7 +12,7 @@ export default function AllJobs() {
       <h2>AllJobs</h2>
     </Wrapper>
   );
-}
+};
 
 const Wrapper = styled.section`
   margin-top: 4rem;
@@ -36,3 +35,5 @@ const Wrapper = styled.section`
     }
   }
 `;
+
+export default AllJobs;

@@ -16,7 +16,7 @@ import {
 import checkDefaultTheme from "./utils/checkDefaultTheme";
 import { registerAction } from "./action/registerAction";
 import { loginAction } from "./action/loginAction";
-import { userLoader, jobLoader } from "./utils/loader";
+import { jobLoader, userLoader } from "./utils/loader";
 import { jobAction } from "./action/jobAction";
 
 checkDefaultTheme();
@@ -44,13 +44,13 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <DashboardLayout />,
-        loader: userLoader,
 
         children: [
           {
             index: true,
             element: <AddJob />,
             action: jobAction,
+            loader: jobLoader,
           },
           {
             path: "stats",
@@ -65,12 +65,14 @@ const router = createBrowserRouter([
           {
             path: "profile",
             element: <Profile />,
+            loader: userLoader,
           },
           {
             path: "admin",
             element: <Admin />,
           },
         ],
+        loader: userLoader,
       },
     ],
   },

@@ -11,22 +11,10 @@ export const userLoader = async () => {
   }
 };
 
-// export const jobLoader = async ({ request }) => {
-//   try {
-//     const { data } = await customFetch("/jobs");
-//     return data;
-//   } catch (error) {
-//     toast.error(error?.response?.data?.msg);
-//     return error;
-//   }
-// };
-
 export const jobLoader = async ({ request }) => {
   try {
-    const { data } = await customFetch.get("/jobs");
-    return {
-      data,
-    };
+    const { data } = await customFetch("/jobs");
+    return data;
   } catch (error) {
     toast.error(error?.response?.data?.msg);
     return error;
