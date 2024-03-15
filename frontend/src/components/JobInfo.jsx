@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import propTypes from "prop-types";
 
 export default function JobInfo({ icon, text }) {
   return (
@@ -26,3 +27,8 @@ const Wrapper = styled.div`
     letter-spacing: var(--letter-spacing);
   }
 `;
+
+JobInfo.propTypes = {
+  icon: propTypes.any,
+  text: propTypes.string,
+};

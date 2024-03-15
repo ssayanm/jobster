@@ -12,12 +12,14 @@ import {
   Profile,
   Admin,
   Stats,
+  EditJob,
 } from "./pages";
 import checkDefaultTheme from "./utils/checkDefaultTheme";
 import { registerAction } from "./action/registerAction";
 import { loginAction } from "./action/loginAction";
-import { jobLoader, userLoader } from "./utils/loader";
-import { jobAction } from "./action/jobAction";
+import { editJobloader, jobLoader, userLoader } from "./utils/loader";
+import { addJobAction } from "./action/addJobAction";
+import { editJobAction } from "./action/editJobAction";
 
 checkDefaultTheme();
 
@@ -49,7 +51,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <AddJob />,
-            action: jobAction,
+            action: addJobAction,
           },
           {
             path: "stats",
@@ -59,6 +61,12 @@ const router = createBrowserRouter([
             path: "all-jobs",
             element: <AllJobs />,
             loader: jobLoader,
+          },
+          {
+            path: "edit-job/:id",
+            element: <EditJob />,
+            loader: editJobloader,
+            action: editJobAction,
           },
 
           {

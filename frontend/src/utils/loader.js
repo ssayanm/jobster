@@ -20,3 +20,13 @@ export const jobLoader = async () => {
     return error;
   }
 };
+
+export const editJobloader = async ({ params }) => {
+  try {
+    const { data } = await customFetch.get(`/jobs/${params.id}`);
+    return data;
+  } catch (error) {
+    toast.error(error.response.data.msg);
+    return redirect("/dashboard/all-jobs");
+  }
+};

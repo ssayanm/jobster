@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import propTypes from "prop-types";
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from "react-icons/fa";
 import { Link, Form } from "react-router-dom";
 import JobInfo from "./JobInfo";
@@ -33,7 +34,10 @@ export default function Job({
           <div className={`status ${jobStatus}`}>{jobStatus}</div>
         </div>
         <footer className="actions">
-          <Link className="btn edit-btn">Edit</Link>
+          <Link to={`../edit-job/${_id}`} className="btn edit-btn">
+            Edit
+          </Link>
+
           <Form>
             <button type="submit" className="btn delete-btn">
               Delete
@@ -122,3 +126,13 @@ const Wrapper = styled.article`
     margin-right: 0.5rem;
   }
 `;
+
+Job.propTypes = {
+  _id: propTypes.any,
+  position: propTypes.string,
+  company: propTypes.string,
+  jobLocation: propTypes.string,
+  jobType: propTypes.string,
+  createdAt: propTypes.string,
+  jobStatus: propTypes.string,
+};
