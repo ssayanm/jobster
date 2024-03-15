@@ -1,14 +1,21 @@
 import styled from "styled-components";
-import { useJobContext } from "../context/JobContext";
+import { useAllJobsContext } from "../context/AllJobsContext";
+import Job from "./Job";
 
 export default function JobsContainer() {
-  const { jobs } = useJobContext();
-  console.log(jobs);
+  const { jobs } = useAllJobsContext();
+  if (jobs.length === 0) {
+    return (
+      <Wrapper>
+        <h2>No jobs to display</h2>
+      </Wrapper>
+    );
+  }
   return (
     <Wrapper>
       <div className="jobs">
         {jobs.map((job) => {
-          return job.position;
+          return <Job key={job._id} {...job} />;
         })}
       </div>
     </Wrapper>
