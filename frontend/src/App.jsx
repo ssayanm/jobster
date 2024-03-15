@@ -20,6 +20,7 @@ import { loginAction } from "./action/loginAction";
 import { editJobloader, jobLoader, userLoader } from "./utils/loader";
 import { addJobAction } from "./action/addJobAction";
 import { editJobAction } from "./action/editJobAction";
+import { deleteJobAction } from "./action/deleteJobAction";
 
 checkDefaultTheme();
 
@@ -67,6 +68,11 @@ const router = createBrowserRouter([
             element: <EditJob />,
             loader: editJobloader,
             action: editJobAction,
+          },
+
+          {
+            path: "delete-job/:id",
+            action: deleteJobAction,
           },
 
           {

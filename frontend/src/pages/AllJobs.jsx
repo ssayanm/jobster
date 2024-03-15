@@ -5,12 +5,11 @@ import AllJobsContext from "../context/AllJobsContext";
 
 const AllJobs = () => {
   const { data } = useLoaderData();
-  const { jobs } = data;
 
   return (
     <AllJobsContext.Provider
       value={{
-        jobs,
+        data,
       }}
     >
       <SearchContainer />

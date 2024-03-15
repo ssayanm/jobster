@@ -3,7 +3,9 @@ import { useAllJobsContext } from "../context/AllJobsContext";
 import Job from "./Job";
 
 export default function JobsContainer() {
-  const { jobs } = useAllJobsContext();
+  const { data } = useAllJobsContext();
+  const { jobs } = data;
+
   if (jobs.length === 0) {
     return (
       <Wrapper>

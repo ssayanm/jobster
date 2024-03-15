@@ -5,6 +5,7 @@ import { Link, Form } from "react-router-dom";
 import JobInfo from "./JobInfo";
 import day from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
+
 day.extend(advancedFormat);
 
 export default function Job({
@@ -38,7 +39,7 @@ export default function Job({
             Edit
           </Link>
 
-          <Form>
+          <Form method="post" action={`../delete-job/${_id}`}>
             <button type="submit" className="btn delete-btn">
               Delete
             </button>
