@@ -30,3 +30,13 @@ export const editJobloader = async ({ params }) => {
     return redirect("/dashboard/all-jobs");
   }
 };
+
+export const adminLoader = async () => {
+  try {
+    const { data } = await customFetch("/users/admin/app-stats");
+    return { data };
+  } catch (error) {
+    toast.error(error?.response?.data?.msg);
+    return error;
+  }
+};

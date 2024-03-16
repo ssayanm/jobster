@@ -6,7 +6,6 @@ import FormRowSelect from "../components/FormRowSelect";
 
 export default function EditJob() {
   const { job } = useLoaderData();
-
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
 

@@ -17,7 +17,12 @@ import {
 import checkDefaultTheme from "./utils/checkDefaultTheme";
 import { registerAction } from "./action/registerAction";
 import { loginAction } from "./action/loginAction";
-import { editJobloader, jobLoader, userLoader } from "./utils/loader";
+import {
+  adminLoader,
+  editJobloader,
+  jobLoader,
+  userLoader,
+} from "./utils/loader";
 import { addJobAction } from "./action/addJobAction";
 import { editJobAction } from "./action/editJobAction";
 import { deleteJobAction } from "./action/deleteJobAction";
@@ -83,6 +88,7 @@ const router = createBrowserRouter([
           {
             path: "admin",
             element: <Admin />,
+            loader: adminLoader,
           },
         ],
       },
