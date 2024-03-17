@@ -11,7 +11,7 @@ export default function Error() {
       <Wrapper>
         <div>
           <img src={img} alt="not found" />
-          <h3>Ohh! page not found</h3>
+          <h3>Oops! page not found</h3>
           <p>We can&apos;t seem to find the page you&apos;re looking for</p>
           <Link to="/dashboard">back home</Link>
         </div>
