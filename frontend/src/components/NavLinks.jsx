@@ -4,11 +4,14 @@ import { useDashboardContext } from "../context/DashboardContext";
 import propTypes from "prop-types";
 
 export default function NavLinks({ isBigSidebar }) {
-  const { toggleSidebar } = useDashboardContext();
+  const { toggleSidebar, user } = useDashboardContext();
+
   return (
     <div className="nav-links">
       {links.map((link) => {
         const { text, path, icon } = link;
+        const { role } = user;
+        if (role !== "admin" && path === "admin") return;
 
         return (
           <NavLink
