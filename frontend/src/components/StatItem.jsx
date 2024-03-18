@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import propTypes from "prop-types";
 
 export default function StatItem({ count, title, icon, color, bcg }) {
   return (
@@ -52,3 +53,11 @@ const Wrapper = styled.article`
     }
   }
 `;
+
+StatItem.propTypes = {
+  count: propTypes.string,
+  title: propTypes.string,
+  icon: propTypes.string,
+  color: propTypes.string,
+  bcg: propTypes.string,
+};
