@@ -26,6 +26,7 @@ import {
 import { addJobAction } from "./action/addJobAction";
 import { editJobAction } from "./action/editJobAction";
 import { deleteJobAction } from "./action/deleteJobAction";
+import { userProfileAction } from "./action/userProfileAction";
 
 checkDefaultTheme();
 
@@ -83,7 +84,7 @@ const router = createBrowserRouter([
           {
             path: "profile",
             element: <Profile />,
-            loader: userLoader,
+            action: userProfileAction,
           },
           {
             path: "admin",
