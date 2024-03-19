@@ -13,7 +13,6 @@ import upload from "../middleware/multerMiddleware.js";
 router.get("/current-user", getCurrentUser);
 router.get(
   "/admin/app-stats",
-
   authorizePermissions("admin"),
   getApplicationStats
 );
