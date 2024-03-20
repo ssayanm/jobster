@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function LogoutContainer() {
   const [showLogout, setShowLogout] = useState(false);
   const { user, logoutUser } = useDashboardContext();
-  console.log(user);
+
   return (
     <Wrapper>
       <button

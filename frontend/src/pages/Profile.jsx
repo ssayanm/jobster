@@ -1,12 +1,11 @@
-import { Form, useNavigation, useOutletContext } from "react-router-dom";
+import { Form, useOutletContext } from "react-router-dom";
 import styled from "styled-components";
 import FormRow from "../components/FormRow";
+import SubmitBtn from "../components/SubmitBtn";
 
 export default function Profile() {
   const { user } = useOutletContext();
   const { name, lastName, email, location } = user;
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
 
   return (
     <Wrapper>
@@ -36,13 +35,7 @@ export default function Profile() {
           />
           <FormRow type="email" name="email" defaultValue={email} />
           <FormRow type="text" name="location" defaultValue={location} />
-          <button
-            className="btn btn-block form-btn"
-            type="submit"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "submitting..." : "save changes"}
-          </button>
+          <SubmitBtn formBtn />
         </div>
       </Form>
     </Wrapper>

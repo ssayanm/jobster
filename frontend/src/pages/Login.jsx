@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import FormRow from "../components/FormRow";
 import Logo from "../components/Logo";
-import { Form, Link, useNavigation } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
+import SubmitBtn from "../components/SubmitBtn";
 
 export default function Login() {
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
-
   return (
     <Wrapper>
       <Form className="form" method="post">
@@ -14,9 +12,7 @@ export default function Login() {
         <h4>Login</h4>
         <FormRow type="email" name="email" defaultValue="sayan@gmail.com" />
         <FormRow type="password" name="password" defaultValue="secret12345" />
-        <button type="submit" className="btn btn-block" disabled={isSubmitting}>
-          {isSubmitting ? "submitting" : "submit"}
-        </button>
+        <SubmitBtn />
         <button type="button" className="btn btn-block">
           explore the app
         </button>
