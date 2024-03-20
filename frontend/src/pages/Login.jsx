@@ -1,10 +1,26 @@
 import styled from "styled-components";
 import FormRow from "../components/FormRow";
 import Logo from "../components/Logo";
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useNavigate } from "react-router-dom";
 import SubmitBtn from "../components/SubmitBtn";
+import { toast } from "react-toastify";
+import customFetch from "../utils/customFetch";
 
 export default function Login() {
+  const navigate = useNavigate();
+  const loginDemoUser = async () => {
+    const data = {
+      email: "test@test.com",
+      password: "secret123",
+    };
+    try {
+      await customFetch.post("/auth/login", data);
+      toast.success("take a test drive");
+      navigate("/dashboard");
+    } catch (error) {
+      toast.error(error?.response?.data?.msg);
+    }
+  };
   return (
     <Wrapper>
       <Form className="form" method="post">
@@ -13,7 +29,7 @@ export default function Login() {
         <FormRow type="email" name="email" defaultValue="sayan@gmail.com" />
         <FormRow type="password" name="password" defaultValue="secret12345" />
         <SubmitBtn />
-        <button type="button" className="btn btn-block">
+        <button type="button" className="btn btn-block" onClick={loginDemoUser}>
           explore the app
         </button>
         <p>
