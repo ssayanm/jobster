@@ -55,9 +55,9 @@ const Wrapper = styled.article`
 `;
 
 StatItem.propTypes = {
-  count: propTypes.string,
+  count: propTypes.number,
   title: propTypes.string,
-  icon: propTypes.string,
+  icon: propTypes.object,
   color: propTypes.string,
   bcg: propTypes.string,
 };

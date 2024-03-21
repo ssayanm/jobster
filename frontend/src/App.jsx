@@ -21,6 +21,7 @@ import {
   adminLoader,
   editJobloader,
   jobLoader,
+  statsLoader,
   userLoader,
 } from "./utils/loader";
 import { addJobAction } from "./action/addJobAction";
@@ -63,6 +64,7 @@ const router = createBrowserRouter([
           {
             path: "stats",
             element: <Stats />,
+            loader: statsLoader,
           },
           {
             path: "all-jobs",
