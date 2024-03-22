@@ -1,7 +1,20 @@
+import { useState } from "react";
+import propTypes from "prop-types";
 import styled from "styled-components";
+import BarChart from "./BarChart";
+import AreaChart from "./AreaChart";
 
-export default function ChartsContainer() {
-  return <Wrapper>ChartsContainer</Wrapper>;
+export default function ChartsContainer({ data }) {
+  const [barChart, setBarChart] = useState(true);
+  return (
+    <Wrapper>
+      <h4>Monthly Aplications</h4>
+      <button type="button" onClick={() => setBarChart(!barChart)}>
+        {barChart ? "Area Chart" : "Bar Chart"}
+      </button>
+      {barChart ? <BarChart data={data} /> : <AreaChart data={data} />}
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.section`
@@ -20,3 +33,7 @@ const Wrapper = styled.section`
     margin-bottom: 0.75rem;
   }
 `;
+
+ChartsContainer.propTypes = {
+  data: propTypes.array,
+};

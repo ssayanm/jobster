@@ -1,9 +1,9 @@
+import propTypes from "prop-types";
 import styled from "styled-components";
 import StatItem from "./StatItem";
 import { FaBug, FaCalendarCheck, FaSuitcaseRolling } from "react-icons/fa";
 
 export default function StatsContainer({ defaultStats }) {
-  console.log(defaultStats);
   const stats = [
     {
       title: "pending applications",
@@ -47,3 +47,7 @@ const Wrapper = styled.section`
     grid-template-columns: 1fr 1fr 1fr;
   }
 `;
+
+StatsContainer.propTypes = {
+  defaultStats: propTypes.object,
+};
