@@ -16,5 +16,5 @@ export default function SubmitBtn({ formBtn }) {
 }
 
 SubmitBtn.propTypes = {
-  formBtn: propTypes.string,
+  formBtn: propTypes.any,
 };

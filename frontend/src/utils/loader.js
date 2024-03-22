@@ -3,6 +3,7 @@ import customFetch from "../utils/customFetch";
 import { toast } from "react-toastify";
 
 export const userLoader = async () => {
+  console.log("hello sayan");
   try {
     const { data } = await customFetch("/users/current-user");
     return data;
