@@ -1,8 +1,8 @@
 import { useState } from "react";
 import propTypes from "prop-types";
 import styled from "styled-components";
-import BarChart from "./BarChart";
 import AreaChart from "./AreaChart";
+import BarChart from "./BarChart";
 
 export default function ChartsContainer({ data }) {
   const [barChart, setBarChart] = useState(true);
