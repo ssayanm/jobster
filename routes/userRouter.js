@@ -1,6 +1,4 @@
 import { Router } from "express";
-const router = Router();
-
 import {
   getApplicationStats,
   getCurrentUser,
@@ -12,6 +10,8 @@ import {
   checkForTestUser,
 } from "../middleware/authMiddleware.js";
 import upload from "../middleware/multerMiddleware.js";
+
+const router = Router();
 
 router.get("/current-user", getCurrentUser);
 router.get(
