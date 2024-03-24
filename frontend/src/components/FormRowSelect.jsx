@@ -4,6 +4,7 @@ export default function FormRowSelect({
   name,
   labelText,
   list = [],
+  onChange,
   defaultValue = "",
 }) {
   return (
@@ -15,6 +16,7 @@ export default function FormRowSelect({
         name={name}
         id={name}
         className="form-select"
+        onChange={onChange}
         defaultValue={defaultValue || ""}
       >
         {list.map((itemValue) => {
@@ -35,4 +37,5 @@ FormRowSelect.propTypes = {
   labelText: propTypes.string,
   list: propTypes.any,
   defaultValue: propTypes.string,
+  onChange: propTypes.func,
 };

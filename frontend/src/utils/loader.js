@@ -18,7 +18,7 @@ export const jobLoader = async ({ request }) => {
 
   try {
     const { data } = await customFetch("/jobs", { params });
-    return { data };
+    return { data, searchValues: { ...params } };
   } catch (error) {
     toast.error(error?.response?.data?.msg);
     return error;

@@ -1,38 +1,56 @@
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useSubmit } from "react-router-dom";
 import styled from "styled-components";
 import FormRow from "./FormRow";
 import FormRowSelect from "./FormRowSelect";
 import { JOB_SORT_BY, JOB_STATUS, JOB_TYPE } from "../utils/constants";
-import SubmitBtn from "./SubmitBtn";
+import { useAllJobsContext } from "../context/AllJobsContext";
 
 export default function SearchContainer() {
+  const submit = useSubmit();
+  const { searchValues } = useAllJobsContext();
+  const { search, jobStatus, JobType, sort } = searchValues;
   return (
     <Wrapper>
       <Form className="form">
         <h5 className="form-title">search form</h5>
         <div className="form-center">
-          <FormRow type="search" name="search" defaultValue="a" />
+          <FormRow
+            type="search"
+            name="search"
+            defaultValue={search}
+            onChange={(e) => {
+              submit(e.currentTarget.form);
+            }}
+          />
           <FormRowSelect
             labelText="job status"
             name="jobStatus"
             list={["all", ...Object.values(JOB_STATUS)]}
-            defaultValue="all"
+            onChange={(e) => {
+              submit(e.currentTarget.form);
+            }}
+            defaultValue={jobStatus}
           />
           <FormRowSelect
             labelText="job type"
             name="jobType"
             list={["all", ...Object.values(JOB_TYPE)]}
-            defaultValue="all"
+            onChange={(e) => {
+              submit(e.currentTarget.form);
+            }}
+            defaultValue={JobType}
           />
           <FormRowSelect
             name="sort"
-            defaultValue="newest"
+            defaultValue={sort}
+            onChange={(e) => {
+              submit(e.currentTarget.form);
+            }}
             list={[...Object.values(JOB_SORT_BY)]}
           />
           <Link to="/dashboard/all-jobs" className="btn form-btn delete-btn">
             Reset Search Values
           </Link>
-          <SubmitBtn formBtn />
         </div>
       </Form>
     </Wrapper>
