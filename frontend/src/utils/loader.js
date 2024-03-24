@@ -3,7 +3,6 @@ import customFetch from "../utils/customFetch";
 import { toast } from "react-toastify";
 
 export const userLoader = async () => {
-  console.log("hello sayan");
   try {
     const { data } = await customFetch("/users/current-user");
     return data;
@@ -12,9 +11,13 @@ export const userLoader = async () => {
   }
 };
 
-export const jobLoader = async () => {
+export const jobLoader = async ({ request }) => {
+  const params = Object.fromEntries([
+    ...new URL(request.url).searchParams.entries(),
+  ]);
+
   try {
-    const { data } = await customFetch("/jobs");
+    const { data } = await customFetch("/jobs", { params });
     return { data };
   } catch (error) {
     toast.error(error?.response?.data?.msg);
