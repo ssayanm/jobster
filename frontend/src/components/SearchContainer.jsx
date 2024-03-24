@@ -6,9 +6,21 @@ import { JOB_SORT_BY, JOB_STATUS, JOB_TYPE } from "../utils/constants";
 import { useAllJobsContext } from "../context/AllJobsContext";
 
 export default function SearchContainer() {
-  const submit = useSubmit();
   const { searchValues } = useAllJobsContext();
   const { search, jobStatus, JobType, sort } = searchValues;
+
+  const submit = useSubmit();
+  const debounce = (onChange) => {
+    let timeout;
+    return (e) => {
+      const form = e.currentTarget.form;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        onChange(form);
+      }, 2000);
+    };
+  };
+
   return (
     <Wrapper>
       <Form className="form">
@@ -18,9 +30,12 @@ export default function SearchContainer() {
             type="search"
             name="search"
             defaultValue={search}
-            onChange={(e) => {
-              submit(e.currentTarget.form);
-            }}
+            // onChange={(e) => {
+            //   submit(e.currentTarget.form);
+            // }}
+            onChange={debounce((form) => {
+              submit(form);
+            })}
           />
           <FormRowSelect
             labelText="job status"
