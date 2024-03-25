@@ -1,4 +1,30 @@
 import styled from "styled-components";
+import { HiChevronDoubleLeft, HiChevronDoubleRight } from "react-icons/hi";
+import { useLocation, Link, useNavigate } from "react-router-dom";
+import { useAllJobsContext } from "../context/AllJobsContext";
+
+export default function PageBtnContainer() {
+  const {
+    data: { numOfPages, currentPage },
+  } = useAllJobsContext();
+
+  const { search, pathname } = useLocation();
+  const navigate = useNavigate();
+
+  return (
+    <Wrapper>
+      {" "}
+      <button className="btn prev-btn">
+        <HiChevronDoubleLeft />
+        prev
+      </button>
+      <button className="btn prev-btn">
+        <HiChevronDoubleRight />
+        next
+      </button>
+    </Wrapper>
+  );
+}
 
 const Wrapper = styled.section`
   height: 6rem;
@@ -57,4 +83,3 @@ const Wrapper = styled.section`
     cursor: text;
   }
 `;
-export default Wrapper;
