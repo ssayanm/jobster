@@ -1,6 +1,6 @@
 import { redirect } from "react-router-dom";
-import customFetch from "../utils/customFetch";
 import { toast } from "react-toastify";
+import customFetch from "../utils/customFetch";
 
 export const userLoader = async () => {
   try {

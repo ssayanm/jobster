@@ -14,6 +14,7 @@ import {
   Stats,
   EditJob,
 } from "./pages";
+
 import checkDefaultTheme from "./utils/checkDefaultTheme";
 import { registerAction } from "./action/registerAction";
 import { loginAction } from "./action/loginAction";
