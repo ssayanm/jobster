@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import FormRow from "../components/FormRow";
 import Logo from "../components/Logo";
-import { Form, Link, useNavigate } from "react-router-dom";
 import SubmitBtn from "../components/SubmitBtn";
+import { Form, Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import customFetch from "../utils/customFetch";
 
@@ -26,8 +26,8 @@ export default function Login() {
       <Form className="form" method="post">
         <Logo />
         <h4>Login</h4>
-        <FormRow type="email" name="email" defaultValue="sayan@gmail.com" />
-        <FormRow type="password" name="password" defaultValue="secret12345" />
+        <FormRow type="email" name="email" />
+        <FormRow type="password" name="password" />
         <SubmitBtn />
         <button type="button" className="btn btn-block" onClick={loginDemoUser}>
           explore the app
