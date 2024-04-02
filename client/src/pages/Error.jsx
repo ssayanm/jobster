@@ -21,7 +21,7 @@ export default function Error() {
   return (
     <Wrapper>
       <div>
-        <h3>Oops ! something went wrong!</h3>
+        <h3>Oops! something went wrong.</h3>
         <Link to="/">back home</Link>
       </div>
     </Wrapper>
