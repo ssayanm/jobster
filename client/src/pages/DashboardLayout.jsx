@@ -8,13 +8,13 @@ import styled from "styled-components";
 import SmallSidebar from "../components/SmallSidebar";
 import BigSidebar from "../components/BigSidebar";
 import Navbar from "../components/Navbar";
+import Loading from "../components/Loading";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import DashboardContext from "../context/DashboardContext";
 import propTypes from "prop-types";
-import { toast } from "react-toastify";
 import customFetch from "../utils/customFetch";
 import checkDefaultTheme from "../utils/checkDefaultTheme";
-import Loading from "../components/Loading";
 
 export default function DashboardLayout() {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import { Form, useOutletContext } from "react-router-dom";
-import FormRow from "../components/FormRow";
 import styled from "styled-components";
 import { JOB_STATUS, JOB_TYPE } from "../utils/constants";
+import FormRow from "../components/FormRow";
 import FormRowSelect from "../components/FormRowSelect";
 import SubmitBtn from "../components/SubmitBtn";
 

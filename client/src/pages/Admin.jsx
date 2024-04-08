@@ -1,5 +1,4 @@
 import { FaSuitcaseRolling, FaCalendarCheck } from "react-icons/fa";
-
 import { useLoaderData } from "react-router-dom";
 import StatItem from "../components/StatItem";
 import styled from "styled-components";
