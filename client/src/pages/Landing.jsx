@@ -21,11 +21,11 @@ export default function Landing() {
             quinoa lo-fi tote bag adaptogen everyday carry meggings +1 brunch
             narwhal.
           </p>
-          <Link to="/register" className="btn register-link">
-            Register
-          </Link>
           <Link to="/login" className="btn">
             Login / Demo User
+          </Link>
+          <Link to="/register" className="btn register-link">
+            Register
           </Link>
         </div>
         <img src={main} alt="job hunt" className="img main-img" />
@@ -63,7 +63,7 @@ const Wrapper = styled.section`
     max-width: 35em;
   }
   .register-link {
-    margin-right: 1rem;
+    margin-left: 1rem;
   }
   .main-img {
     display: none;
