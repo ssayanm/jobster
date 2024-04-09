@@ -17,7 +17,7 @@ export default function BarChartComponent({ data }) {
         <XAxis dataKey="date" />
         <YAxis allowDecimals={false} />
         <Tooltip />
-        <Bar type="monotone" dataKey="count" stroke="#2cb1bc" fill="#bef8fd" />
+        <Bar type="monotone" dataKey="count" stroke="#EF70FE" fill="#CE53DF" />
       </BarChart>
     </ResponsiveContainer>
   );
