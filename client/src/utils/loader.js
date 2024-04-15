@@ -1,21 +1,15 @@
 import { redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import customFetch from "../utils/customFetch";
-import { statsQuery } from "../pages/Stats";
-import { userQuery } from "../pages/DashboardLayout";
-
-// export const userLoader = async () => {
-//   try {
-//     const { data } = await customFetch("/users/current-user");
-//     return data;
-//   } catch (error) {
-//     redirect("/");
-//   }
-// };
+import { statsQuery, userQuery } from "../utils/query";
 
 export const userLoader = (queryClient) => async () => {
-  const data = await queryClient.ensureQueryData(userQuery);
-  return data;
+  try {
+    const data = await queryClient.ensureQueryData(userQuery);
+    return data;
+  } catch (error) {
+    redirect("/");
+  }
 };
 
 export const jobLoader = async ({ request }) => {
