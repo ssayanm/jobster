@@ -1,15 +1,7 @@
 import StatsContainer from "../components/StatsContainer";
 import ChartsContainer from "../components/ChartsContainer";
 import { useQuery } from "@tanstack/react-query";
-import customFetch from "../utils/customFetch";
-
-export const statsQuery = {
-  queryKey: ["stats"],
-  queryFn: async () => {
-    const response = await customFetch.get("/jobs/stats");
-    return response.data;
-  },
-};
+import { statsQuery } from "../utils/query";
 
 export default function Stats() {
   // const { defaultStats, monthlyApplications } = useLoaderData();
