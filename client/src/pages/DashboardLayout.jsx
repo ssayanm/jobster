@@ -1,9 +1,4 @@
-import {
-  Outlet,
-  useLoaderData,
-  useNavigate,
-  useNavigation,
-} from "react-router-dom";
+import { Outlet, useNavigate, useNavigation } from "react-router-dom";
 import styled from "styled-components";
 import SmallSidebar from "../components/SmallSidebar";
 import BigSidebar from "../components/BigSidebar";
@@ -15,10 +10,23 @@ import DashboardContext from "../context/DashboardContext";
 import propTypes from "prop-types";
 import customFetch from "../utils/customFetch";
 import checkDefaultTheme from "../utils/checkDefaultTheme";
+import { useQuery } from "@tanstack/react-query";
+
+export const userQuery = {
+  queryKey: ["user"],
+  queryFn: async () => {
+    const { data } = await customFetch("/users/current-user");
+    return data;
+  },
+};
 
 export default function DashboardLayout() {
   const navigate = useNavigate();
-  const { user } = useLoaderData();
+  // const { user } = useLoaderData();
+
+  const { user } = useQuery(userQuery).data || {};
+
+  // const { user } = useQuery(userQuery)?.data;
 
   const navigation = useNavigation();
   const isPageLoading = navigation.state === "loading";

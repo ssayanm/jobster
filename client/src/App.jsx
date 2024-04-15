@@ -66,7 +66,7 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <DashboardLayout />,
-        loader: userLoader,
+        loader: userLoader(queryClient),
         children: [
           {
             index: true,
