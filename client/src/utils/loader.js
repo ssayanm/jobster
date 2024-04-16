@@ -1,7 +1,7 @@
 import { redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import customFetch from "../utils/customFetch";
-import { statsQuery, userQuery } from "../utils/query";
+import { allJobsQuery, statsQuery, userQuery } from "../utils/query";
 
 export const userLoader = (queryClient) => async () => {
   try {
@@ -12,19 +12,16 @@ export const userLoader = (queryClient) => async () => {
   }
 };
 
-export const jobLoader = async ({ request }) => {
-  const params = Object.fromEntries([
-    ...new URL(request.url).searchParams.entries(),
-  ]);
+export const jobLoader =
+  (queryClient) =>
+  async ({ request }) => {
+    const params = Object.fromEntries([
+      ...new URL(request.url).searchParams.entries(),
+    ]);
 
-  try {
-    const { data } = await customFetch("/jobs", { params });
-    return { data, searchValues: { ...params } };
-  } catch (error) {
-    toast.error(error?.response?.data?.msg);
-    return error;
-  }
-};
+    await queryClient.ensureQueryData(allJobsQuery(params));
+    return { searchValues: { ...params } };
+  };
 
 export const editJobloader = async ({ params }) => {
   try {
