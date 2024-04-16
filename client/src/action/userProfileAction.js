@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import customFetch from "../utils/customFetch";
+import { redirect } from "react-router-dom";
 
 export const userProfileAction =
   (queryClient) =>
@@ -14,8 +15,9 @@ export const userProfileAction =
 
     try {
       await customFetch.patch("/users/update-user", formData);
+      queryClient.invalidateQueries(["user"]);
       toast.success("Profile updated successfully");
-      queryClient.invalidateQueries();
+      return redirect("/dashboard");
     } catch (error) {
       toast.error(error?.response?.data?.msg);
     }

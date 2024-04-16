@@ -13,7 +13,7 @@ import customFetch from "../utils/customFetch";
 import checkDefaultTheme from "../utils/checkDefaultTheme";
 import { userQuery } from "../utils/query";
 
-export default function DashboardLayout() {
+export default function DashboardLayout({ queryClient }) {
   const navigate = useNavigate();
   // const { user } = useLoaderData();
 
@@ -41,7 +41,7 @@ export default function DashboardLayout() {
   const logoutUser = async () => {
     navigate("/");
     await customFetch.get("/auth/logout");
-    //  queryClient.invalidateQueries();
+    queryClient.invalidateQueries();
     toast.success("Logging out...");
   };
 
@@ -94,4 +94,5 @@ const Wrapper = styled.section`
 
 DashboardLayout.propTypes = {
   isDarkThemeEnabled: propTypes.any,
+  queryClient: propTypes.any,
 };

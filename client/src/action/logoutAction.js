@@ -10,8 +10,8 @@ export const logoutAction =
 
     try {
       await customFetch.post("/auth/login", data);
-      toast.success("Logout successful");
       queryClient.invalidateQueries();
+      toast.success("Logout successful");
       return redirect("/login");
     } catch (error) {
       toast.error(error?.response?.data?.msg);
