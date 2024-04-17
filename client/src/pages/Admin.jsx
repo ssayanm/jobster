@@ -1,10 +1,12 @@
 import { FaSuitcaseRolling, FaCalendarCheck } from "react-icons/fa";
-import { useLoaderData } from "react-router-dom";
 import StatItem from "../components/StatItem";
 import styled from "styled-components";
+import { useQuery } from "@tanstack/react-query";
+import { adminQuery } from "../utils/query";
 
 export default function Admin() {
-  const { users, jobs } = useLoaderData();
+  const { data } = useQuery(adminQuery);
+  const { users, jobs } = data;
 
   return (
     <Wrapper>

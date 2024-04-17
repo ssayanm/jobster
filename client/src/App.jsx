@@ -104,7 +104,7 @@ const router = createBrowserRouter([
           {
             path: "admin",
             element: <Admin />,
-            loader: adminLoader,
+            loader: adminLoader(queryClient),
           },
         ],
       },

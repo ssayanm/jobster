@@ -1,7 +1,12 @@
 import { redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import customFetch from "../utils/customFetch";
-import { allJobsQuery, statsQuery, userQuery } from "../utils/query";
+import {
+  adminQuery,
+  allJobsQuery,
+  statsQuery,
+  userQuery,
+} from "../utils/query";
 
 export const userLoader = (queryClient) => async () => {
   try {
@@ -33,14 +38,19 @@ export const editJobloader = async ({ params }) => {
   }
 };
 
-export const adminLoader = async () => {
-  try {
-    const response = await customFetch("/users/admin/app-stats");
-    return response.data;
-  } catch (error) {
-    toast.error("You are not authorized to view this page");
-    return redirect("/dashboard");
-  }
+// export const adminLoader = async () => {
+//   try {
+//     const response = await customFetch("/users/admin/app-stats");
+//     return response.data;
+//   } catch (error) {
+//     toast.error("You are not authorized to view this page");
+//     return redirect("/dashboard");
+//   }
+// };
+
+export const adminLoader = (queryClient) => async () => {
+  const data = await queryClient.ensureQueryData(adminQuery);
+  return data;
 };
 
 // export const statsLoader = async () => {

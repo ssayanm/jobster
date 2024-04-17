@@ -16,6 +16,14 @@ export const statsQuery = {
   },
 };
 
+export const adminQuery = {
+  queryKey: ["jobs", "user"],
+  queryFn: async () => {
+    const response = await customFetch.get("/users/admin/app-stats");
+    return response.data;
+  },
+};
+
 export const allJobsQuery = (params) => {
   const { search, jobStatus, jobType, sort, page } = params;
   return {
