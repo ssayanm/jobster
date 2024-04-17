@@ -1,9 +1,10 @@
 import { redirect } from "react-router-dom";
 import { toast } from "react-toastify";
-import customFetch from "../utils/customFetch";
+
 import {
   adminQuery,
   allJobsQuery,
+  singleJobQuery,
   statsQuery,
   userQuery,
 } from "../utils/query";
@@ -28,15 +29,32 @@ export const jobLoader =
     return { searchValues: { ...params } };
   };
 
-export const editJobloader = async ({ params }) => {
-  try {
-    const { data } = await customFetch.get(`/jobs/${params.id}`);
-    return data;
-  } catch (error) {
-    toast.error(error.response.data.msg);
-    return redirect("/dashboard/all-jobs");
-  }
+export const editJobloader =
+  (queryClient) =>
+  async ({ params }) => {
+    try {
+      await queryClient.ensureQueryData(singleJobQuery(params.id));
+      return params.id;
+    } catch (error) {
+      toast.error(error?.response?.data?.msg);
+      return redirect("/dashboard/all-jobs");
+    }
+  };
+
+export const adminLoader = (queryClient) => async () => {
+  const data = await queryClient.ensureQueryData(adminQuery);
+  return data;
 };
+
+// export const editJobloader = async ({ params }) => {
+//   try {
+//     const { data } = await customFetch.get(`/jobs/${params.id}`);
+//     return data;
+//   } catch (error) {
+//     toast.error(error.response.data.msg);
+//     return redirect("/dashboard/all-jobs");
+//   }
+// };
 
 // export const adminLoader = async () => {
 //   try {
@@ -47,11 +65,6 @@ export const editJobloader = async ({ params }) => {
 //     return redirect("/dashboard");
 //   }
 // };
-
-export const adminLoader = (queryClient) => async () => {
-  const data = await queryClient.ensureQueryData(adminQuery);
-  return data;
-};
 
 // export const statsLoader = async () => {
 //   return null;

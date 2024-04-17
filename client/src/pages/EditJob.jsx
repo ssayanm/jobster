@@ -4,9 +4,15 @@ import styled from "styled-components";
 import { JOB_STATUS, JOB_TYPE } from "../utils/constants";
 import FormRowSelect from "../components/FormRowSelect";
 import SubmitBtn from "../components/SubmitBtn";
+import { useQuery } from "@tanstack/react-query";
+import { singleJobQuery } from "../utils/query";
 
 export default function EditJob() {
-  const { job } = useLoaderData();
+  const id = useLoaderData();
+
+  const {
+    data: { job },
+  } = useQuery(singleJobQuery(id));
 
   return (
     <Wrapper>
