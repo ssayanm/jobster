@@ -42,9 +42,19 @@ export const editJobloader =
   };
 
 export const adminLoader = (queryClient) => async () => {
-  const data = await queryClient.ensureQueryData(adminQuery);
-  return data;
+  try {
+    const data = await queryClient.ensureQueryData(adminQuery);
+    return data;
+  } catch (error) {
+    toast.error("You are not authorized to view this page");
+    return redirect("/dashboard");
+  }
 };
+
+// export const adminLoader = (queryClient) => async () => {
+//   const data = await queryClient.ensureQueryData(adminQuery);
+//   return data;
+// };
 
 // export const editJobloader = async ({ params }) => {
 //   try {

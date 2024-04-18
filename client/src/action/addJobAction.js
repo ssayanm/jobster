@@ -10,8 +10,10 @@ export const addJobAction =
 
     try {
       await customFetch.post("/jobs", data);
+
       queryClient.invalidateQueries(["jobs"]);
       toast.success("Job Creation successful");
+
       return redirect("all-jobs");
     } catch (error) {
       toast.error(error?.response?.data?.msg);
