@@ -5,7 +5,7 @@ import SmallSidebar from "../components/SmallSidebar";
 import BigSidebar from "../components/BigSidebar";
 import Navbar from "../components/Navbar";
 import Loading from "../components/Loading";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import DashboardContext from "../context/DashboardContext";
 import propTypes from "prop-types";
@@ -24,8 +24,9 @@ export default function DashboardLayout({ queryClient }) {
   const navigation = useNavigation();
   const isPageLoading = navigation.state === "loading";
 
-  const [showSidebar, setShowSidebar] = useState("false");
+  const [showSidebar, setShowSidebar] = useState(true);
   const [isDarkTheme, setIsDarkTheme] = useState(checkDefaultTheme());
+  const [isAuthError, setIsAuthError] = useState(false);
 
   const toggleDarkTheme = () => {
     const newDarkTheme = !isDarkTheme;
@@ -38,12 +39,36 @@ export default function DashboardLayout({ queryClient }) {
     setShowSidebar(!showSidebar);
   };
 
-  const logoutUser = async () => {
+  // const logoutUser = async () => {
+  //   navigate("/");
+  //   await customFetch.get("/auth/logout");
+  //   queryClient.invalidateQueries();
+  //   toast.success("Logging out...");
+  // };
+
+  const logoutUser = useCallback(async () => {
     navigate("/");
     await customFetch.get("/auth/logout");
     queryClient.invalidateQueries();
     toast.success("Logging out...");
-  };
+  }, [navigate, queryClient]);
+
+  customFetch.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    (error) => {
+      if (error?.response?.status === 401) {
+        setIsAuthError(true);
+      }
+      return Promise.reject(error);
+    }
+  );
+
+  useEffect(() => {
+    if (!isAuthError) return;
+    logoutUser();
+  }, [isAuthError, logoutUser]);
 
   return (
     <DashboardContext.Provider
