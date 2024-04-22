@@ -1,6 +1,4 @@
 import { Router } from "express";
-const router = Router();
-
 import {
   getAllJobs,
   getJob,
@@ -14,6 +12,8 @@ import {
   validateIdParam,
 } from "../middleware/validationMiddleware.js";
 import { checkForTestUser } from "../middleware/authMiddleware.js";
+
+const router = Router();
 
 router
   .route("/")

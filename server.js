@@ -1,7 +1,7 @@
+import * as dotenv from "dotenv";
 import express from "express";
 import "express-async-errors";
 import morgan from "morgan";
-import * as dotenv from "dotenv";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import cloudinary from "cloudinary";
