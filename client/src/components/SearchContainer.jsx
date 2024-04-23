@@ -2,7 +2,7 @@ import { Form, Link, useSubmit } from "react-router-dom";
 import styled from "styled-components";
 import FormRow from "./FormRow";
 import FormRowSelect from "./FormRowSelect";
-import { JOB_SORT_BY, JOB_STATUS, JOB_TYPE } from "../utils/constants";
+import { JOB_SORT_BY, JOB_STATUS, JOB_TYPE } from "../../../utils/constants";
 import { useAllJobsContext } from "../context/AllJobsContext";
 
 export default function SearchContainer() {

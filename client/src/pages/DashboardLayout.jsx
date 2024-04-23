@@ -1,21 +1,20 @@
 import { Outlet, useNavigate, useNavigation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { useCallback, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import styled from "styled-components";
+import propTypes from "prop-types";
+import DashboardContext from "../context/DashboardContext";
 import SmallSidebar from "../components/SmallSidebar";
 import BigSidebar from "../components/BigSidebar";
 import Navbar from "../components/Navbar";
 import Loading from "../components/Loading";
-import { useCallback, useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import DashboardContext from "../context/DashboardContext";
-import propTypes from "prop-types";
 import customFetch from "../utils/customFetch";
 import checkDefaultTheme from "../utils/checkDefaultTheme";
 import { userQuery } from "../utils/query";
 
 export default function DashboardLayout({ queryClient }) {
   const navigate = useNavigate();
-  // const { user } = useLoaderData();
 
   const { user } = useQuery(userQuery).data || {};
 
@@ -38,13 +37,6 @@ export default function DashboardLayout({ queryClient }) {
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
-
-  // const logoutUser = async () => {
-  //   navigate("/");
-  //   await customFetch.get("/auth/logout");
-  //   queryClient.invalidateQueries();
-  //   toast.success("Logging out...");
-  // };
 
   const logoutUser = useCallback(async () => {
     navigate("/");

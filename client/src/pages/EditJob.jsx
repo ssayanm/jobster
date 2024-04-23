@@ -1,7 +1,7 @@
 import { Form, useLoaderData } from "react-router-dom";
 import FormRow from "../components/FormRow";
 import styled from "styled-components";
-import { JOB_STATUS, JOB_TYPE } from "../utils/constants";
+import { JOB_STATUS, JOB_TYPE } from "../../../utils/constants";
 import FormRowSelect from "../components/FormRowSelect";
 import SubmitBtn from "../components/SubmitBtn";
 import { useQuery } from "@tanstack/react-query";
